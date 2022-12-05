@@ -1,9 +1,17 @@
+server:
+  port: 8000
 spring:
   datasource:
     username: root
     password: huangyao
     url: jdbc:mysql://152.136.178.202:3306/gulimall_ums?userUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
     driver-class-name: com.mysql.cj.jdbc.Driver
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 152.136.178.202:8848
+  application:
+    name: gulimall-member
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
   global-config:
