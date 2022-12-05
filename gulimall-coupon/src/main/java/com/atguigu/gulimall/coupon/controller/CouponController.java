@@ -3,14 +3,16 @@ package com.atguigu.gulimall.coupon.controller;
 import com.atguigu.common.utils.PageUtils;
 import com.atguigu.common.utils.R;
 import com.atguigu.gulimall.coupon.entity.CouponEntity;
+import com.atguigu.gulimall.coupon.refresh.ReUser;
 import com.atguigu.gulimall.coupon.service.CouponService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Map;
-
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 /**
@@ -20,21 +22,23 @@ import java.util.Map;
  * @email huangyao_a@163.com
  * @date 2022-12-05 14:44:47
  */
+@Slf4j
 @RestController
 @RequestMapping("coupon/coupon")
 public class CouponController {
     @Autowired
     private CouponService couponService;
 
-    @Value("${coupon.user.name}")
-    private String name;
+    @Autowired
+    private ReUser reUser;
 
-    @Value("${coupon.user.age}")
-    private Integer age;
+    private AtomicInteger count = new AtomicInteger(0);
 
     @RequestMapping("testGetYml")
     private R testGetYml(){
-
+        String name = reUser.getName();
+        Integer age = reUser.getAge();
+        log.info("{} 第{}次进来了.", LocalDateTime.now(),  count.addAndGet(1));
         return R.ok().put("name", name).put("age", age);
     }
 
