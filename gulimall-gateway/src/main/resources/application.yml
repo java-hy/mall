@@ -11,3 +11,13 @@ spring:
           uri: https://www.qq.com
           predicates:
             - Query=url,qq
+
+        - id: admin_route
+          uri: lb://renren-fast
+          predicates:
+            - Path=/api/**
+          filters:
+            - RewritePath=/api/(?<segment>.*),/renren-fast/$\{segment}
+# 前端项目, /api
+# http://localhost:88/api/captcha.jpg 还是404,原因 路由需要重写
+# 而我们希望 网关能将api路径转成 http://localhost:8080/renren-fast/captcha.jpg
