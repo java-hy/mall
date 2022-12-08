@@ -4,7 +4,7 @@ server:
     uri-encoding: UTF-8
     max-threads: 1000
     min-spare-threads: 30
-  port: 11006
+  port: 8080
   connection-timeout: 5000ms
   servlet:
     context-path: /renren-fast
@@ -39,6 +39,13 @@ spring:
     throw-exception-if-no-handler-found: true
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER
+  application:
+    name: renren-fast
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 152.136.178.202:8848
+        namespace: 1dbd5af0-e04c-4f3f-a46e-0e267a1ea640
 #  resources:
 #    add-mappings: false
 
